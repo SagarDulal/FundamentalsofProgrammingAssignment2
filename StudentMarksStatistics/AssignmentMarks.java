@@ -12,14 +12,14 @@ public class AssignmentMarks {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("+++++++++++++");
-        System.out.println("-- WELCOME --");
+        System.out.println("-- WELCOME TO the Program --");
         System.out.println("+++++++++++++");
 
         System.out.println("\n* Please enter the name of the file you want to read *");
         String fileName = scan.nextLine();
                 System.out.println("\n++++++++++++++++++++++++++++++++++");
-                System.out.println("-------------- MENU --------------");
-                System.out.println("++++++++++++++++++++++++++++++++++");
+                System.out.println("-------------- MENU ----------------");
+                System.out.println("++++++++++++++++++++++++++++++++++++");
                 System.out.println("* 1. Print total marks of all students *" );
                 System.out.println("* 2. Print students with total marks lower than the given threshold *");
                 System.out.println("* 3. Print top 5 students with highest total marks *");
