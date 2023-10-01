@@ -14,9 +14,10 @@ public class AssignmentMarks {
         System.out.println("+++++++++++++");
         System.out.println("-- WELCOME TO the Program --");
         System.out.println("+++++++++++++");
-
         System.out.println("\n* Please enter the name of the file you want to read *");
         String fileName = scan.nextLine();
+        List<Results> results = readMarks(fileName);
+
                 System.out.println("\n++++++++++++++++++++++++++++++++++");
                 System.out.println("-------------- MENU ----------------");
                 System.out.println("++++++++++++++++++++++++++++++++++++");
@@ -26,6 +27,20 @@ public class AssignmentMarks {
                 System.out.println("* 4. Print top 5 students with lowest total marks *");
                 System.out.println("* 5. Exit *");
                 System.out.println("* Please choose options from 1 to 5. Type the number and press ENTER to execute the respective function: *");             
+    }
+    
+    private static void top5Students(List<Results> results, String highest) {
+    }
+
+    private static void belowThreshold(List<Results> results, double threshold) {
+    }
+
+    private static void totalMarks(List<Results> results) {
+        System.out.println("* Student list with individual total marks and assignment marks: *");
+    }
+    
+    public static List<Results> readMarks(String fileName){
+    return null; // For testing now
     }
 
 }
