@@ -57,6 +57,12 @@ public class AssignmentMarks {
                         double threshold = scan.nextDouble();
                         belowThreshold(results, threshold);
                         break;
+                        case 3:
+                        top5Students(results, "highest");
+                        break;
+                    case 4:
+                        top5Students(results, "lowest");
+                        break;
                     default:
                         System.out.println("* Invalid option. Please select from 1 to 5 *");
                 }
@@ -85,6 +91,39 @@ public class AssignmentMarks {
                         result.getTotalMarks() + " *");
             }
         }
+    }
+
+    //method to print either top 5 highest or top 5 lowest scoring students
+    private static void top5Students(List<Results> results, String str) {
+        Results[] resultsArr = results.toArray(new Results[0]);
+
+        //insertion sorting the results array in ascending order according to the total marks of the results
+        for(int i = 1; i < resultsArr.length; i++){
+            int j = i;
+            while(j > 0 && resultsArr[j].getTotalMarks() < resultsArr[j-1].getTotalMarks()){
+                Results temp = resultsArr[j];
+                resultsArr[j] = resultsArr[j-1];
+                resultsArr[j-1] = temp;
+                j--;
+            }
+        }
+        //if the given parameter is lowest print the results of the sorted array from the begining of the array to get lowest ones
+        if(str.equals("lowest")){
+            for(int i = 0; i < 5; i++){
+                System.out.println("* Name: " + resultsArr[i].getFirstName() + " " + resultsArr[i].getLastName() +
+                                             ", Student ID: " + resultsArr[i].getStudentId() + ", Total Marks: " +
+                                             resultsArr[i].getTotalMarks() + " *");
+            }
+        }
+        //else print the results from the end of the sorted array to get the highest ones
+        else {
+            for(int i = resultsArr.length - 1; i > resultsArr.length - 6; i--){
+                System.out.println("* Name: " + resultsArr[i].getFirstName() + " " + resultsArr[i].getLastName() +
+                        ", Student ID: " + resultsArr[i].getStudentId() + ", Total Marks: " +
+                        resultsArr[i].getTotalMarks() + " *");
+            }
+        }
+
     }
     
     //method to handle the file and read all the contents from the given file
