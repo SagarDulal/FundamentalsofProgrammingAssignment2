@@ -199,6 +199,7 @@ public class AssignmentMarks {
         System.out.println("*** Students with total marks lower than " + threshold + ": ***");
         if(threshold <0 || threshold >100){
                 System.out.println("Please provide valid input from 0 to 100 only"); 
+                return;
             }
         for (Results result: results){
             if(result.getTotalMarks() < threshold){
