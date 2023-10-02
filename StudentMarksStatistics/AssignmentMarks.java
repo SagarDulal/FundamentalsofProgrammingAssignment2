@@ -1,3 +1,4 @@
+ 
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -8,8 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AssignmentMarks {
+    //main method
     public static void main(String[] args) {
-
+        
         Scanner scan = new Scanner(System.in);
         System.out.println("+++++++++++++");
         System.out.println("-- WELCOME --");
@@ -20,7 +22,8 @@ public class AssignmentMarks {
 
         //calling the readMarks and readUnit methods and storing the data as Results in results list and String
         List<Results> results = readMarks(fileName);
-        String unitName = readUnit(fileName);
+        // String unitName = readUnit(fileName);
+
 
         if (results != null){
 
@@ -53,36 +56,49 @@ public class AssignmentMarks {
                         System.out.println("* Invalid option. Please select from 1 to 5 *");
                 }
             }
-        }         }
+        }
+    }
+    
+    //method to print results with calculated total marks
+    private static void totalMarks(List<Results> results) {
+        System.out.println("*** Students with individual total marks and assignment marks: *** ");
+        for(Results result: results){
+            System.out.println("* Name: " + result.getFirstName() + " " + result.getLastName() +
+                    ", Student ID: " + result.getStudentId() + ", A1: " + result.getAsn1() +
+                    ", A2: " + result.getAsn2() + ", A3: " + result.getAsn3() + ", Total Marks: " +
+                    result.getTotalMarks() + " *");
+        }
+    }
 
+    
     //method to handle the file and read all the contents from the given file
-    public static List<Results> readMarks(String fileName){
+    public static List<Results> readMarks(String fileName) {
         List<Results> results = new ArrayList<>();
-        boolean fileNotFound = true; // Flag to track if the file is not found
-
-        while (fileNotFound) {
+    
+        while (true) { // Infinite loop until a valid file is found or the user exits
             try {
                 if (fileName.equalsIgnoreCase("exit")) {
                     System.out.println("Exiting the program...");
-                    System.exit(0); // Terminate the program on user demand 
+                    System.exit(0); // Terminate the program on user demand
                 }
+    
+                // Create a new FileReader and BufferedReader for each attempt
                 FileReader reader = new FileReader(System.getProperty("user.dir") + "/resources/" + fileName);
                 BufferedReader bufferedReader = new BufferedReader(reader);
-
+    
                 String data;
                 int lineCounter = 1;
-
-                //loop to iterate through every line in the file
+    
+                // loop to iterate through every line in the file
                 while ((data = bufferedReader.readLine()) != null) {
-
-                    //skip the first and second line
+                    // skip the first and second line
                     if (lineCounter == 1 || lineCounter == 2) {
                         lineCounter++;
                         continue;
                     }
-
+    
                     String[] details = data.split(",");
-
+    
                     Results result = new Results();
                     try {
                         result.setLastName(details[0].trim());
@@ -97,7 +113,7 @@ public class AssignmentMarks {
                         if (details.length >= 6) {
                             result.setAsn3(tryParse(details[5]));
                         }
-                        result.setTotalMarks(result.getAsn1()+result.getAsn2()+result.getAsn3());
+                        result.setTotalMarks(result.getAsn1() + result.getAsn2() + result.getAsn3());
                         results.add(result);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         System.out.println("Some data are missing in line number " + lineCounter + " of the given file.");
@@ -106,59 +122,61 @@ public class AssignmentMarks {
                     }
                     lineCounter++;
                 }
-
-                fileNotFound = false; // Set the flag to false if the file is found
-
-            }catch (FileNotFoundException e){
-                System.out.println("File not found. Please enter a valid filename or type 'exit' to exit: ");
-                Scanner scanner = new Scanner(System.in);
-                fileName = scanner.nextLine();
-            } catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-
-        return results;
-    }
-
-    //method to read the Unit from the file
-    public static String readUnit(String fileName){
-        String unitName = null;
-        boolean fileNotFound = true; // Flag to track if the file is not found
-
-        while (fileNotFound) {
-            try {
-                if (fileName.equalsIgnoreCase("exit")) {
-                    System.out.println("Exiting the program...");
-                    System.exit(0); // Terminate the program on user demand 
-                }
-                FileReader reader = new FileReader(System.getProperty("user.dir") + "/resources/" + fileName);
-                BufferedReader bufferedReader = new BufferedReader(reader);
-                String str = bufferedReader.readLine();
-                unitName = str.split(":")[1].trim();
-                fileNotFound = false; // Set the flag to false if the file is found
+    
+                // Close the BufferedReader after reading
+                bufferedReader.close();
+                
+                // Break out of the loop if the file is found and processed successfully
+                break;
+    
             } catch (FileNotFoundException e) {
                 System.out.println("File not found. Please enter a valid filename or type 'exit' to exit: ");
                 Scanner scanner = new Scanner(System.in);
                 fileName = scanner.nextLine();
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
 
-        return unitName;
+        }
+    
+        return results;
     }
 
-    //method to print results with calculated total marks
-    private static void totalMarks(List<Results> results) {
-        System.out.println("*** Students with individual total marks and assignment marks: *** ");
-        for(Results result: results){
-            System.out.println("* Name: " + result.getFirstName() + " " + result.getLastName() +
-                ", Student ID: " + result.getStudentId() + ", A1: " + result.getAsn1() +
-                ", A2: " + result.getAsn2() + ", A3: " + result.getAsn3() + ", Total Marks: " +
-                result.getTotalMarks() + " *");
+        //method to read the Unit from the file
+        public static String readUnit(String fileName){
+            String unitName = null;
+            boolean fileNotFound = true; // Flag to track if the file is not found
+    
+            while (fileNotFound) {
+                try {
+                    if (fileName.equalsIgnoreCase("exit")) {
+                        System.out.println("Exiting the program...");
+                        System.exit(0); // Terminate the program on user demand 
+                    }
+                    FileReader reader = new FileReader(System.getProperty("user.dir") + "/resources/" + fileName);
+                    BufferedReader bufferedReader = new BufferedReader(reader);
+                    String str = bufferedReader.readLine();
+                    unitName = str.split(":")[1].trim();
+                    fileNotFound = false; // Set the flag to false if the file is found
+                    
+                    // Close the BufferedReader after reading
+                    bufferedReader.close();
+                    // Break out of the loop if the file is found and processed successfully
+                    break;
+                        
+                } catch (FileNotFoundException e) {
+                    System.out.println("File not found. Please enter a valid filename or type 'exit' to exit: ");
+                    Scanner scanner = new Scanner(System.in);
+                    fileName = scanner.nextLine();
+                    
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+    
+            return unitName;
         }
-    }
 
     
     //method to parse the string into double. if it encounters any error while parsing
@@ -169,6 +187,7 @@ public class AssignmentMarks {
             return 0.0;
         }
     }
+
 
 
 }
