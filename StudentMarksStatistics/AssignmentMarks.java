@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class AssignmentMarks {
     //main method
@@ -38,30 +39,36 @@ public class AssignmentMarks {
                 System.out.println("* 5. Exit *");
                 System.out.println("* Please choose options from 1 to 5. Type the number and press ENTER to execute the respective function: *");
 
-                int fcn = scan.nextInt();
+                try{
+                    int fcn = scan.nextInt();
 
-                //if the input is 5 then break the loop to terminate the application
-                if(fcn == 5)
-                    break; 
+                    //if the input is 5 then break the loop to terminate the application
+                    if(fcn == 5)
+                        break; 
 
-                //switch-case to select which functions the user wants to use
-                switch (fcn){
-                    case 1:
-                        totalMarks(results);
-                        break;
-                    case 2:
-                        System.out.println("* Enter the threshold mark: ");
-                        double threshold = scan.nextDouble();
-                        belowThreshold(results, threshold);
-                        break;
-                    case 3:
-                        top5Students(results, "highest");
-                        break;
-                    case 4:
-                        top5Students(results, "lowest");
-                        break;
-                    default:
-                        System.out.println("* Invalid option. Please select from 1 to 5 *");
+                    //switch-case to select which functions the user wants to use
+                    switch (fcn){
+                        case 1:
+                            totalMarks(results);
+                            break;
+                        case 2:
+                            System.out.println("* Enter the threshold mark: ");
+                            double threshold = scan.nextDouble();
+                            belowThreshold(results, threshold);
+                            break;
+                        case 3:
+                            top5Students(results, "highest");
+                            break;
+                        case 4:
+                            top5Students(results, "lowest");
+                            break;
+                        default:
+                            System.out.println("* Invalid option. Please select from 1 to 5 *");
+                    }
+                }catch(InputMismatchException e){
+                    // Handling the wrong input provided by the user
+                    System.out.println("* Invalid input. Please provide valid option from 1 to 5 * "); 
+                    scan.nextLine();
                 }
             }
         }
@@ -174,7 +181,6 @@ public class AssignmentMarks {
         return unitName;
     }
 
-    
     //F2: Method to print results with calculated total marks
     private static void totalMarks(List<Results> results) {
         System.out.println("*** Students with individual total marks and assignment marks: *** ");
@@ -231,7 +237,6 @@ public class AssignmentMarks {
 
     }
 
-
     //Method to parse the string into double. if it encounters any error while parsing
     public static Double tryParse(String str){
         try{
@@ -240,6 +245,5 @@ public class AssignmentMarks {
             return 0.0;
         }
     }
-
 
 }
