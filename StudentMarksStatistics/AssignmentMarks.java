@@ -52,6 +52,11 @@ public class AssignmentMarks {
                     case 1:
                         totalMarks(results);
                         break;
+                    case 2:
+                        System.out.println("* Enter the threshold mark: ");
+                        double threshold = scan.nextDouble();
+                        belowThreshold(results, threshold);
+                        break;
                     default:
                         System.out.println("* Invalid option. Please select from 1 to 5 *");
                 }
@@ -70,6 +75,17 @@ public class AssignmentMarks {
         }
     }
 
+     //method to print results with total marks below the given threshold
+    private static void belowThreshold(List<Results> results, double threshold) {
+        System.out.println("*** Students with total marks lower than " + threshold + ": ***");
+        for (Results result: results){
+            if(result.getTotalMarks() < threshold){
+                System.out.println("* Name: " + result.getFirstName() + " " + result.getLastName() +
+                        ", Student ID: " + result.getStudentId() + ", Total Marks: " +
+                        result.getTotalMarks() + " *");
+            }
+        }
+    }
     
     //method to handle the file and read all the contents from the given file
     public static List<Results> readMarks(String fileName) {
