@@ -11,15 +11,15 @@ public class Results {
 
     public Results() {
     }
-    
-    public Results(String lastName, String firstName, String studentId, double asn1, double asn2, double asn3) {
+
+    public Results(String lastName, String firstName, String studentId, double asn1, double asn2, double asn3, double totalMarks) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.studentId = studentId;
         this.asn1 = asn1;
         this.asn2 = asn2;
         this.asn3 = asn3;
-        this.totalMarks = asn1 + asn2 + asn3;
+        this.totalMarks = totalMarks;
     }
 
     public String getFirstName() {
@@ -68,6 +68,14 @@ public class Results {
 
     public void setAsn3(double asn3) {
         this.asn3 = asn3;
+    }
+
+    public double getTotalMarks() {
+        return totalMarks;
+    }
+
+    public void setTotalMarks(double totalMarks) {
+        this.totalMarks = totalMarks;
     }
 }
 
