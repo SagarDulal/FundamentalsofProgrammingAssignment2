@@ -36,6 +36,10 @@ public class AssignmentMarks {
     
         while (fileNotFound) {
             try {
+                if (fileName.equalsIgnoreCase("exit")) {
+                    System.out.println("Exiting the program...");
+                    System.exit(0); // Terminate the program on user demand 
+                }
                 FileReader reader = new FileReader(System.getProperty("user.dir") + "/resources/" + fileName);
                 BufferedReader bufferedReader = new BufferedReader(reader);
     
@@ -80,7 +84,7 @@ public class AssignmentMarks {
                 fileNotFound = false; // Set the flag to false if the file is found
     
             }catch (FileNotFoundException e){
-                System.out.println("File does not exist. Please enter a valid filename: ");
+                System.out.println("File not found. Please enter a valid filename or type 'exit' to exit: ");
                 Scanner scanner = new Scanner(System.in);
                 fileName = scanner.nextLine();
             } catch (IOException e){
@@ -91,30 +95,35 @@ public class AssignmentMarks {
         return results;
     }
 
-
+    
     //method to read the Unit from the file
     public static String readUnit(String fileName){
         String unitName = null;
         boolean fileNotFound = true; // Flag to track if the file is not found
-
+    
         while (fileNotFound) {
             try {
+                if (fileName.equalsIgnoreCase("exit")) {
+                    System.out.println("Exiting the program...");
+                    System.exit(0); // Terminate the program on user demand 
+                }
                 FileReader reader = new FileReader(System.getProperty("user.dir") + "/resources/" + fileName);
                 BufferedReader bufferedReader = new BufferedReader(reader);
                 String str = bufferedReader.readLine();
                 unitName = str.split(":")[1].trim();
                 fileNotFound = false; // Set the flag to false if the file is found
             } catch (FileNotFoundException e) {
-                System.out.println("File does not exist. Please enter a valid filename: ");
+                System.out.println("File not found. Please enter a valid filename or type 'exit' to exit: ");
                 Scanner scanner = new Scanner(System.in);
                 fileName = scanner.nextLine();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
+    
         return unitName;
     }
+
         
     
     
