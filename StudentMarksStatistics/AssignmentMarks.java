@@ -75,15 +75,36 @@ public class AssignmentMarks {
                 }
                 lineCounter++;
             }
+            
 
         }catch (FileNotFoundException e){
             System.out.println("File does not exist........ Stopping the application.......");
+            System.out.println("Please restart the application");
+            System.exit(1);  
+            
         } catch (IOException e){
             e.printStackTrace();
         }
 
         return results;
     }
+    
+    //method to read the Unit from the file
+    public static String readUnit(String fileName){
+        try{
+            FileReader reader = new FileReader(System.getProperty("user.dir") +"/resources/" + fileName);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String str = bufferedReader.readLine();
+            return str.split(":")[1].trim();
+        } catch (FileNotFoundException e){
+            System.out.println("File does not exist........ Stopping the application.......");
+            System.exit(1);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     
     
     //method to parse the string into double. if it encounters any error while parsing
