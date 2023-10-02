@@ -1,4 +1,6 @@
 
+// Please  make sure that the file is on correct directory in resouce folder and the name should be provided with extension i.e, marks.csv.
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,7 +17,7 @@ public class AssignmentMarks {
         Scanner scan = new Scanner(System.in);
         System.out.println("+++++++++++++");
         System.out.println("-- WELCOME --");
-        System.out.println("+++++++++++++");
+        System.out.println("+++++++++++++"); 
 
         System.out.println("\n* Please enter the name of the file you want to read *");
         String fileName = scan.nextLine();
@@ -53,7 +55,7 @@ public class AssignmentMarks {
                             break;
                         case 2:
                             System.out.println("* Enter the threshold mark: ");
-                            double threshold = scan.nextDouble();
+                            double threshold = scan.nextDouble(); 
                             belowThreshold(results, threshold);
                             break;
                         case 3:
@@ -195,6 +197,9 @@ public class AssignmentMarks {
     //F3:Method to print results with total marks below the given threshold
     private static void belowThreshold(List<Results> results, double threshold) {
         System.out.println("*** Students with total marks lower than " + threshold + ": ***");
+        if(threshold <0 || threshold >100){
+                System.out.println("Please provide valid input from 0 to 100 only"); 
+            }
         for (Results result: results){
             if(result.getTotalMarks() < threshold){
                 System.out.println("* Name: " + result.getFirstName() + " " + result.getLastName() +
